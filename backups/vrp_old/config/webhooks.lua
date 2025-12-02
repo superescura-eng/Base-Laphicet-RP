@@ -1,0 +1,80 @@
+local Webhooks = {
+	-- LOGIN
+	createAccount = "",
+	webhookjoins = "",
+	webhookadminwl = "",
+	webhookunwl = "",
+	webhookexit = "",
+	-- ADMIN
+	webhookadmin = "",
+	webhookkick = "",
+	webhookgive = "",
+	webhookban = "",
+	webhookaddcar = "",
+	webhookgems = "",
+	webhookunban = "",
+	webhookset = "",
+	webhookunset = "",
+	webhooklimparinv = "",
+	webhookids = "",
+	-- MEDIC
+	webhooktratamento = "",
+	webhookdiagnostico = "",
+	webhooklinkdeath = "",
+	servicedeus = "",
+	webhookgod = "",
+	webhookreviver = "",
+	webhooksocorro = "",
+	-- OTHERS
+	webhookraces = "",
+	hookdesmanche = "",
+	rouboshook = "",
+	webhookairdrop = "",
+	webhookgrafite = "",
+	webhookcassino = "",
+	webhooklavagem = "",
+	webhookselldrugs = "",
+	webhhokdomination = "",
+	-- BANK
+	webhookbank = "",
+	webhooksacar = "",
+	webhooktransferir = "",
+	webhookfatura = "",
+	webhookmultas = "",
+	webhooksacou = "",
+	webhookdepositou = "",
+	webhooksalario = "",
+	-- VEHICLES
+	webhookcomprar = "",
+	webhookrobberycar = "",
+	webhookgarage = "",
+	-- INVENTORY
+	colocouitens = "",
+	retiradadeitens = "",
+	webhookportamalas =  "",
+	webhookportaluvas =  "",
+	webhookbaucasas =  "",
+	webhookdropItem =  "",
+	webhookrevistar =  "",
+	webhookpickupItem =  "",
+	-- MDT
+	webhookmdtmanage = "",
+	webhookprison = "",
+	webhookmulta = "",
+	-- ROTAS
+	webhookroutes = "",
+	-- PAINEL FAC
+	webhookdemote = "",
+	webhookinvite = "",
+	webhookleaveorg = "",
+	webhookpromote = "",
+	webhookbankdeposit = "",
+	webhookbankwithdraw = "",
+	webhookreward = "",
+	-- BATE PONTO
+	webhooktogglepolice = "",
+	webhooktogglemedic = "",
+	webhooktogglemechanic = "",
+}
+
+return Webhooks

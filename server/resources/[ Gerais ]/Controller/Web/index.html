@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Controller</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="css.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="deathscreen">
+      <img src="./skull.png" alt="" id="deathskull" />
+      <div class="centerdeath">
+        <img src="./skull.png" alt="skull" />
+        <h1>Você está <span>morto</span></h1>
+        <div id="chronometer">
+          <div class="deathnumber timer1">0</div>
+          <div class="deathnumber timer2">5</div>
+          <span>:</span>
+          <div class="deathnumber timer3">0</div>
+          <div class="deathnumber timer4">0</div>
+        </div>
+      </div>
+      <div class="bottominfo">
+        <div>Aperte <span>E</span> para dar sinal de vida</div>
+        <div>Digite <span>/GG</span> para desistir</div>
+      </div>
+    </div>
+    <div id="app"></div>
+    <div id="divCode">
+      <div id="midCode">
+        <div onclick="clickCode('13');">Oficial Ferido</div>
+        <div onclick="clickCode('20');">Localização</div>
+        <div onclick="clickCode('32');">Suspeito</div>
+        <div onclick="clickCode('78');">Reforço</div>
+      </div>
+    </div>
+    <div id="freezeRadar">RADAR TRAVADO - [M] para destravar</div>
+    <div id="topRadar">CARREGANDO</div>
+    <div id="botRadar">CARREGANDO</div>
+    <script src="jquery.js"></script>
+  </body>
+</html>
