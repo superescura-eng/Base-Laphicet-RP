@@ -85,5 +85,35 @@ Devido à ofuscação, os nomes exatos são gerados em tempo de execução, mas 
 2.  **pma-voice**: Para chamadas de voz.
 3.  **Conexão Internet**: Necessária para validar o token e baixar assets de som (`ring.ogg`).
 
+## Análise de Mercado e Contexto
+
+A pesquisa web indica que o **SmartphoneVRP** é um script **proprietário e exclusivo**, desenvolvido por um grupo brasileiro ("Reborn Studios" ou similar, evidenciado pelo domínio `.br` na API).
+
+### Comparação com Scripts Públicos
+Diferente de opções populares como **LB Phone**, **OkOkPhone** ou **Quasar Phone**, este script:
+- **Não possui documentação pública**: O que reforça seu caráter de produto fechado/pago.
+- **Dependência de API Externa**: A validação de token e assets remotos (`api.rebornsystem.com.br`) é uma medida de proteção contra pirataria (DRM) não comum em scripts open-source.
+- **Foco em Performance**: O uso de um backend Node.js dedicado e ORM próprio sugere uma preocupação com otimização, similar ao **High Phone**.
+
+### Funcionalidades Identificadas (Confirmadas vs Típicas)
+
+Baseado na análise de código e padrões de mercado, este smartphone oferece:
+
+| Categoria | Funcionalidade | Status no Código |
+|-----------|----------------|------------------|
+| **Social** | Instagram (com Stories/Likes) | ✅ Confirmado |
+| **Social** | Twitter (Qwuaker/Bluebird) | ✅ Confirmado |
+| **Social** | Tinder/Apps de Encontro | ❓ Provável |
+| **Comunicação** | WhatsApp (Grupos/Áudio) | ✅ Confirmado |
+| **Comunicação** | Videochamadas | ✅ Confirmado (`videoServer`) |
+| **Economia** | Banco (Fleeca/NuBank) | ✅ Confirmado |
+| **Economia** | Criptomoedas | ✅ Confirmado |
+| **Ilegal** | Dark Web (TOR) | ✅ Confirmado |
+| **Entretenimento** | Câmera com Filtros | ✅ Confirmado |
+| **Entretenimento** | Música (Spotify/SoundCloud) | ❓ Possível |
+| **Sistema** | AirDrop/Transferência | ❓ Possível |
+
 ## Conclusão da Análise
 O **SmartphoneVRP** é um componente de alta complexidade, operando quase como uma aplicação independente dentro do FiveM. Sua dependência de um backend Node.js e validação de token externa indica ser um produto comercial licenciado (Reborn), com forte segurança contra modificações (código ofuscado). A ausência de arquivos SQL confirma o uso de um sistema moderno de auto-gestão de banco de dados.
+
+> **Nota**: A ausência de resultados de busca para "SmartphoneVRP" em fóruns internacionais reforça que este é um produto focado no mercado brasileiro de FiveM.
