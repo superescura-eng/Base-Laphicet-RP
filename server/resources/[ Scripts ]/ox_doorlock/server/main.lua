@@ -237,11 +237,10 @@ local function isAuthorised(playerId, door, lockpick)
 	return authorised
 end
 
-local sql = LoadResourceFile(cache.resource, 'sql/ox_doorlock.sql')
-
-if sql then MySQL.query(sql) end
-
 MySQL.ready(function()
+	local sql = LoadResourceFile(cache.resource, 'sql/ox_doorlock.sql')
+	if sql then MySQL.query(sql, {}) end
+
 	while Config.DoorList do Wait(100) end
 
 	local response = MySQL.query.await('SELECT `id`, `name`, `data` FROM `ox_doorlock`')
@@ -325,7 +324,13 @@ RegisterNetEvent('ox_doorlock:editDoorlock', function(id, data)
 				MySQL.update('UPDATE ox_doorlock SET name = ?, data = ? WHERE id = ?',
 					{ data.name, encodeData(data), id })
 			else
-				MySQL.update('DELETE FROM ox_doorlock WHERE id = ?', { id })
+				MySQL.query([[CREATE TABLE IF NOT EXISTS `ox_doorlock` (
+			`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+			`name` varchar(50) DEFAULT NULL,
+			`data` longtext DEFAULT NULL,
+			PRIMARY KEY (`id`)
+		)]])
+				TriggerClientEvent('ox_doorlock:editDoorlock', -1, id, data)
 			end
 
 			doors[id] = data

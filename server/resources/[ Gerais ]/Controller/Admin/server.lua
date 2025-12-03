@@ -3,12 +3,12 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 Tunnel = module("vrp","lib/Tunnel") or {}
 Proxy = module("vrp","lib/Proxy") or {}
-Webhooks = module("config/webhooks") or {}
+Webhooks = module("vrp","cfg/webhooks") or {}
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
-local GlobalItems = module('vrp',"config/Itemlist") or {}
-RegisterServerEvent("Reborn:reloadInfos",function() GlobalItems = module('vrp',"config/Itemlist") end)
+local GlobalItems = module('vrp',"cfg/items") or {}
+RegisterServerEvent("Reborn:reloadInfos",function() GlobalItems = module('vrp',"cfg/items") end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CONNECTION
 -----------------------------------------------------------------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ local Query = {
     UPDATE_PLAYER = 'UPDATE `{user_table}` SET inventory = ? WHERE `{user_column}` = ?',
 }
 
-Citizen.CreateThreadNow(function()
+MySQL.ready(function()
     local playerTable, playerColumn, vehicleTable, vehicleColumn
 
     if shared.framework == 'ox' then
@@ -99,24 +99,24 @@ Citizen.CreateThreadNow(function()
         end
 
         if not glovebox then
-            MySQL.query(('ALTER TABLE `%s` ADD COLUMN `glovebox` LONGTEXT NULL'):format(vehicleTable))
+            MySQL.query(('ALTER TABLE `%s` ADD COLUMN `glovebox` LONGTEXT NULL'):format(vehicleTable), {})
         end
 
         if not trunk then
-            MySQL.query(('ALTER TABLE `%s` ADD COLUMN `trunk` LONGTEXT NULL'):format(vehicleTable))
+            MySQL.query(('ALTER TABLE `%s` ADD COLUMN `trunk` LONGTEXT NULL'):format(vehicleTable), {})
         end
     end
 
     success, result = pcall(MySQL.scalar.await, ('SELECT inventory FROM `%s`'):format(playerTable))
 
     if not success then
-        MySQL.query(('ALTER TABLE `%s` ADD COLUMN `inventory` LONGTEXT NULL'):format(playerTable))
+        MySQL.query(('ALTER TABLE `%s` ADD COLUMN `inventory` LONGTEXT NULL'):format(playerTable), {})
     end
 
     local clearStashes = GetConvar('inventory:clearstashes', '6 MONTH')
 
     if clearStashes ~= '' then
-        pcall(MySQL.query.await, ('DELETE FROM ox_inventory WHERE lastupdated < (NOW() - INTERVAL %s)'):format(clearStashes))
+        pcall(MySQL.query.await, ('DELETE FROM ox_inventory WHERE lastupdated < (NOW() - INTERVAL %s)'):format(clearStashes), {})
     end
 end)
 

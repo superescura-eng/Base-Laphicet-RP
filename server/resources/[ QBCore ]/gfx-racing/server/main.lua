@@ -4,36 +4,38 @@ GFX.ActiveRaces = {}
 GFX.LeaderBoard = {}
 Citizen.CreateThread(function()
     GFX.Framework = GFX.GetFramework()
-    MySQL.query([[
-        CREATE TABLE IF NOT EXISTS `gfx_racing` (
-            `identifier` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `routes` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `racehistory` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `win` INT(11) NULL DEFAULT NULL,
-            `lose` INT(11) NULL DEFAULT NULL,
-            `favouritecar` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `distance` BIGINT(20) NULL DEFAULT NULL,
-            `charname` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `incomingrace` INT(11) NULL DEFAULT NULL,
-            `lastrace` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `playerphoto` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci'
-        ) COLLATE='utf8_general_ci' ENGINE=InnoDB;
-    ]])
-    MySQL.query([[
-        CREATE TABLE IF NOT EXISTS `races` (
-            `owner` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `reward` INT(11) NULL DEFAULT NULL,
-            `date` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `maxplayers` INT(11) NULL DEFAULT NULL,
-            `route` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `id` BIGINT(20) NULL DEFAULT NULL,
-            `players` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-            `luadate` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci'
-        ) COLLATE='utf8_general_ci' ENGINE=InnoDB;
-    ]])
+    MySQL.ready(function()
+        MySQL.query([[
+            CREATE TABLE IF NOT EXISTS `gfx_racing` (
+                `identifier` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `routes` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `racehistory` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `win` INT(11) NULL DEFAULT NULL,
+                `lose` INT(11) NULL DEFAULT NULL,
+                `favouritecar` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `distance` BIGINT(20) NULL DEFAULT NULL,
+                `charname` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `incomingrace` INT(11) NULL DEFAULT NULL,
+                `lastrace` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `playerphoto` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+            ) COLLATE='utf8_general_ci' ENGINE=InnoDB;
+        ]])
+        MySQL.query([[
+            CREATE TABLE IF NOT EXISTS `races` (
+                `owner` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `reward` INT(11) NULL DEFAULT NULL,
+                `date` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `maxplayers` INT(11) NULL DEFAULT NULL,
+                `route` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `id` BIGINT(20) NULL DEFAULT NULL,
+                `players` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `luadate` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+            ) COLLATE='utf8_general_ci' ENGINE=InnoDB;
+        ]])
+    end)
     Wait(2000)
-    local races = MySQL.query.await('SELECT * FROM races')
+    local races = MySQL.query.await('SELECT * FROM races', {})
     for k,v in pairs(races) do
         local data = {
             Name = v.name,
@@ -47,7 +49,7 @@ Citizen.CreateThread(function()
         Racers = json.decode(v.players) ~= nil and json.decode(v.players) or {}
         table.insert(GFX.ActiveRaces, {data = data, route = json.decode(v.route), owner = v.owner, id = v.id, players = Racers, luadate = v.luadate})
     end
-    local racers = MySQL.query.await('SELECT * FROM gfx_racing')
+    local racers = MySQL.query.await('SELECT * FROM gfx_racing', {})
     for k,v in pairs(racers) do
         table.insert(GFX.LeaderBoard, {
             win = tonumber(v.win),

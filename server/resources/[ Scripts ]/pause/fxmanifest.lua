@@ -5,7 +5,7 @@ lua54 "yes"
 ui_page "web/index.html"
 
 client_scripts {
-	"@vrp/config/Native.lua",
+	-- "@vrp/config/Native.lua",
 	"@PolyZone/client.lua",
 	"@vrp/lib/Utils.lua",
 	"client/*"
@@ -22,7 +22,7 @@ files {
 }
 
 shared_scripts {
-	"@vrp/config/Item.lua",
-	"@vrp/config/Vehicle.lua",
+	"@vrp/cfg/items.lua",
+	"@vrp/cfg/garages.lua",
 	"shared/*"
 }

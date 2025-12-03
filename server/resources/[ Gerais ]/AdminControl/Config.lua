@@ -1,6 +1,6 @@
 Proxy = module("vrp","lib/Proxy")
 Tunnel = module("vrp","lib/Tunnel")
-Tools = module("vrp","lib/Tools")
+
 vRP = Proxy.getInterface("vRP")
 
 -----##########################################################-----

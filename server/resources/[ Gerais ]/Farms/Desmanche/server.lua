@@ -2,7 +2,7 @@ Tunnel = module("vrp","lib/Tunnel")
 Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
-Webhooks = module("config/webhooks")
+Webhooks = module("vrp","cfg/webhooks") or {}
 
 Desmanche = {}
 Tunnel.bindInterface("Desmanche", Desmanche)

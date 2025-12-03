@@ -27,9 +27,9 @@ ox_libs {
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     '@vrp/lib/utils.lua',
-    '@vrp/config/Item.lua',
-    '@vrp/config/Usables.lua',
-    '@vrp/config/Vehicle.lua',
+    '@vrp/cfg/items.lua',
+    -- '@vrp/config/Usables.lua',
+    '@vrp/cfg/garages.lua',
     'init.lua'
 }
 

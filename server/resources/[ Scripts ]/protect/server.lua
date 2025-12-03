@@ -1,6 +1,6 @@
 local Proxy = module("vrp","lib/Proxy") or {}
 local Tunnel = module("vrp","lib/Tunnel") or {}
-local Webhooks = module("config/webhooks") or {}
+local Webhooks = module("vrp","cfg/webhooks") or {}
 vRP = Proxy.getInterface("vRP")
 
 Protect = {}

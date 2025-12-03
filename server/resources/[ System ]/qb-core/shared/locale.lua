@@ -3,8 +3,18 @@ Locale.__index = Locale
 
 function Locale:new(name, data)
     local self = setmetatable({}, Locale)
-    self.name = name
-    self.phrases = data
+
+    if type(name) == "table" then
+        local config = name
+        self.name = config.name or "Unknown"
+        self.phrases = config.phrases or {}
+        self.warnOnMissing = config.warnOnMissing or false
+    else
+        self.name = name
+        self.phrases = data
+        self.warnOnMissing = false
+    end
+
     return self
 end
 

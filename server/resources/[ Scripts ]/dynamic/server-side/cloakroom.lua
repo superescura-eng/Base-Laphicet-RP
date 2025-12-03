@@ -16,15 +16,17 @@ CreateThread(function ()
     vRP._prepare("cloakroom/selectClothesT","SELECT * FROM cloakrooms WHERE service = @service AND sexo = @sexo")
     vRP._prepare("cloakroom/selectClothesW","SELECT * FROM cloakrooms WHERE name = @name AND sexo = @sexo")
     vRP._prepare("cloakroom/selectClothes","SELECT * FROM cloakrooms WHERE name = @name AND permiss = @permiss")
-    exports["oxmysql"]:execute([[
-        CREATE TABLE IF NOT EXISTS `cloakrooms` (
-        `name` varchar(55) NOT NULL,
-        `permiss` varchar(55) NOT NULL,
-        `service` varchar(55) NOT NULL,
-        `custom` varchar(500) NOT NULL,
-        `sexo` varchar(55) NOT NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=LATIN1;
-    ]])
+    MySQL.ready(function()
+        MySQL.query([[
+            CREATE TABLE IF NOT EXISTS `cloakrooms` (
+            `name` varchar(55) NOT NULL,
+            `permiss` varchar(55) NOT NULL,
+            `service` varchar(55) NOT NULL,
+            `custom` varchar(500) NOT NULL,
+            `sexo` varchar(55) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=LATIN1;
+        ]])
+    end)
 end)
 
 local propCloths = {

@@ -9,7 +9,7 @@ local function generateUniqueWarehouseId()
     local warehouseId, isUnique = nil, false
     while not isUnique do
         warehouseId = math.random(500, 1000)
-        local result = MySQL.query.await('SELECT `warehouse_id` FROM `warehouses` WHERE `warehouse_id` = ?', {warehouseId})
+        local result = MySQL.query.await('SELECT `id`, `name`, `data` FROM `warehouse` WHERE `warehouse_id` = ?', {warehouseId})
         if result[1] == nil then isUnique = true end
     end
     return warehouseId
@@ -275,35 +275,20 @@ RegisterCommand("requestStashInfo", function(source, args, rawCommand)
     else
         TriggerClientEvent('ox_lib:notify', src, {title = 'Erro', description = 'Você não tem permissão para usar este comando!', type = 'error'})
     end
-end)
-
-AddEventHandler('onResourceStart', function(resourceName)
-    if GetCurrentResourceName() ~= resourceName then return end
-    MySQL.query.await([[
-        CREATE TABLE IF NOT EXISTS `warehouses` (
-        `id` int(11) NOT NULL AUTO_INCREMENT,
-        `owner` varchar(100) NOT NULL,
-        `steam_id` varchar(50) DEFAULT NULL,
-        `discord` varchar(50) NOT NULL,
-        `name` varchar(100) NOT NULL,
-        `code` varchar(4) NOT NULL,
-        `location` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`location`)),
-        `warehouse_id` int(11) NOT NULL,
-        `max_slots` int(11) DEFAULT 50,
-        `max_weight` int(11) DEFAULT 50000,
-        `original_price` int(11) NOT NULL DEFAULT 0,
-        `purchase_count` int(11) NOT NULL DEFAULT 0,
-        PRIMARY KEY (`id`),
-        UNIQUE KEY `warehouse_id_UNIQUE` (`warehouse_id`),
-        UNIQUE KEY `name_UNIQUE` (`name`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-    ]])
-    local warehouses = MySQL.query.await('SELECT `warehouse_id`, `name`, `owner`, `max_slots`, `max_weight` FROM `warehouses`')
-    if warehouses then
-        for _, warehouse in pairs(warehouses) do
-            exports.ox_inventory:RegisterStash('warehouse_' .. warehouse.warehouse_id, warehouse.name, warehouse.max_slots, warehouse.max_weight, warehouse.owner)
+            `original_price` int(11) NOT NULL DEFAULT 0,
+            `purchase_count` int(11) NOT NULL DEFAULT 0,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `warehouse_id_UNIQUE` (`warehouse_id`),
+            UNIQUE KEY `name_UNIQUE` (`name`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+        ]], {})
+        local warehouses = MySQL.query.await('SELECT `warehouse_id`, `name`, `owner`, `max_slots`, `max_weight` FROM `warehouses`', {})
+        if warehouses then
+            for _, warehouse in pairs(warehouses) do
+                exports.ox_inventory:RegisterStash('warehouse_' .. warehouse.warehouse_id, warehouse.name, warehouse.max_slots, warehouse.max_weight, warehouse.owner)
+            end
         end
-    end
+    end)
 end)
 
 RegisterNetEvent('warehouse:sell')

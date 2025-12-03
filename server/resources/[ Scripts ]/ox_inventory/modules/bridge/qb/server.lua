@@ -89,8 +89,8 @@ SetTimeout(500, function()
 		StopResource('qb-shops')
 	end
 
-	for _, Player in pairs(QBCore.Functions.GetQBPlayers()) do
-		setupPlayer(Player)
+	for _, Player in pairs(QBCore.Functions.GetPlayers()) do
+		setupPlayer(QBCore.Functions.GetPlayer(Player))
 	end
 end)
 
